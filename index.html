@@ -1,39 +1,249 @@
-name: Daily Stock LLM Wiki Builder
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>台股五大供應鏈 LLM Wiki 知識庫</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
 
-on:
-  schedule:
-    # 每天台灣時間早上 08:00 自動執行（對應 UTC 時間 00:00）
-    - cron: '0 0 * * *'
-  # 允許在 GitHub 網頁上手動點擊按鈕立即執行測試
-  workflow_dispatch:
+  <!-- 頂部導覽列 -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+        <h1 class="font-bold text-slate-900 text-base sm:text-lg tracking-tight">
+          台股五大供應鏈 LLM Wiki 知識庫
+        </h1>
+      </div>
+      <div class="flex items-center gap-3 text-xs text-slate-500">
+        <span id="last-updated" class="hidden sm:inline bg-slate-100 px-2.5 py-1 rounded-md">
+          載入索引中...
+        </span>
+      </div>
+    </div>
+  </header>
 
-permissions:
-  contents: write
+  <!-- 主體雙欄排版 -->
+  <div class="max-w-7xl w-full mx-auto flex-1 flex flex-col md:flex-row">
 
-jobs:
-  build-wiki:
-    runs-on: ubuntu-latest
+    <!-- 左側資料夾導覽列 -->
+    <aside class="w-full md:w-72 bg-white md:bg-transparent border-b md:border-b-0 md:border-r border-slate-200 p-4 sm:p-5 shrink-0">
+      <div class="mb-5">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">
+          專案規範文件
+        </div>
+        <button onclick="loadRootDoc('AGENTS.md')" id="btn-agents"
+          class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-200/60 transition flex items-center gap-2">
+          <span>📋</span>
+          <span>AGENTS.md（專案規則）</span>
+        </button>
+      </div>
 
-    steps:
-      - name: 1. 取得儲存庫最新檔案
-        uses: actions/checkout@v4
+      <div>
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">
+          wiki_knowledge / 類股知識庫
+        </div>
+        <nav id="folder-tree" class="space-y-4 text-sm">
+          <div class="text-slate-400 text-xs py-2">正在讀取知識庫目錄...</div>
+        </nav>
+      </div>
+    </aside>
 
-      - name: 2. 設定雲端 Python 環境
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+    <!-- 右側 Markdown 筆記閱讀區 -->
+    <main class="flex-1 p-4 sm:p-8 overflow-y-auto">
+      <div class="max-w-3xl mx-auto">
+        <!-- 目前檔案路徑麵包屑 -->
+        <div id="breadcrumb" class="text-xs text-slate-400 mb-3 font-mono">
+          準備就緒
+        </div>
 
-      - name: 3. 執行爬蟲抓取五大類股最新新聞
-        run: python crawler.py
+        <!-- 筆記內容白底卡片 -->
+        <article id="viewer" class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-10 leading-relaxed">
+          <div class="text-center py-12 text-slate-400 text-sm">
+            請從左側選擇一個類股筆記，或點擊「AGENTS.md」查看系統規則。
+          </div>
+        </article>
+      </div>
+    </main>
 
-      - name: 4. 呼叫 Gemini 編譯 LLM Wiki 知識庫
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python wiki_builder.py
+  </div>
 
-      - name: 5. 自動存檔並推送更新至 GitHub
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add raw_news/ wiki_knowledge/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: 自動更新每日供應鏈新聞與 LLM Wiki 筆記" && git push)
+  <script>
+    // 簡易安全跳脫字元
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    // 將 Markdown 與 [[雙向連結]] 轉換為乾淨的淺色 Notion 風格 HTML
+    function renderMarkdown(md) {
+      const lines = md.split(/\r?\n/);
+      let html = [];
+      let inCodeBlock = false;
+      let inList = false;
+
+      const formatInline = (text) => {
+        let safe = escapeHtml(text);
+        // 渲染 [[雙向連結]] 為淺藍膠囊標籤
+        safe = safe.replace(
+          /\[\[(.*?)\]\]/g,
+          '<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200 mx-0.5">$1</span>'
+        );
+        // 渲染粗體 **text**
+        safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-slate-900">$1</strong>');
+        // 渲染行內程式碼 `code`
+        safe = safe.replace(/`([^`]+)`/g, '<code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-xs font-mono">$1</code>');
+        return safe;
+      };
+
+      for (let line of lines) {
+        if (line.trim().startsWith("```")) {
+          if (inList) { html.push("</ul>"); inList = false; }
+          if (!inCodeBlock) {
+            html.push('<pre class="bg-slate-900 text-slate-100 text-xs p-4 rounded-xl overflow-x-auto my-4 font-mono leading-relaxed"><code>');
+            inCodeBlock = true;
+          } else {
+            html.push("</code></pre>");
+            inCodeBlock = false;
+          }
+          continue;
+        }
+
+        if (inCodeBlock) {
+          html.push(escapeHtml(line) + "\n");
+          continue;
+        }
+
+        const trimmed = line.trim();
+
+        if (!trimmed) {
+          if (inList) { html.push("</ul>"); inList = false; }
+          continue;
+        }
+
+        if (trimmed === "---") {
+          if (inList) { html.push("</ul>"); inList = false; }
+          html.push('<hr class="my-6 border-slate-200" />');
+          continue;
+        }
+
+        if (trimmed.startsWith("# ")) {
+          if (inList) { html.push("</ul>"); inList = false; }
+          html.push(`<h1 class="text-2xl font-bold text-slate-900 pb-3 mb-5 border-b border-slate-200">${formatInline(trimmed.slice(2))}</h1>`);
+        } else if (trimmed.startsWith("## ")) {
+          if (inList) { html.push("</ul>"); inList = false; }
+          html.push(`<h2 class="text-lg font-bold text-slate-800 mt-7 mb-3">${formatInline(trimmed.slice(3))}</h2>`);
+        } else if (trimmed.startsWith("### ")) {
+          if (inList) { html.push("</ul>"); inList = false; }
+          html.push(`<h3 class="text-base font-bold text-blue-900 bg-slate-50 border-l-4 border-blue-500 px-3.5 py-2 rounded-r-lg mt-6 mb-3">${formatInline(trimmed.slice(4))}</h3>`);
+        } else if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+          if (!inList) {
+            html.push('<ul class="space-y-2 my-3 pl-5 list-disc text-slate-700 text-sm sm:text-[15px]">');
+            inList = true;
+          }
+          html.push(`<li>${formatInline(trimmed.slice(2))}</li>`);
+        } else {
+          if (inList) { html.push("</ul>"); inList = false; }
+          html.push(`<p class="text-slate-700 text-sm sm:text-[15px] my-2.5">${formatInline(trimmed)}</p>`);
+        }
+      }
+
+      if (inList) html.push("</ul>");
+      return html.join("\n");
+    }
+
+    // 載入根目錄文件（如 AGENTS.md）
+    async function loadRootDoc(filename) {
+      document.getElementById("breadcrumb").innerText = `/${filename}`;
+      try {
+        const res = await fetch(`${filename}?t=${Date.now()}`);
+        if (!res.ok) throw new Error("無法讀取檔案");
+        const text = await res.text();
+        document.getElementById("viewer").innerHTML = renderMarkdown(text);
+      } catch (e) {
+        document.getElementById("viewer").innerHTML = `<div class="text-slate-500 text-sm">請先將檔案上傳至 GitHub Pages 後即可線上瀏覽。</div>`;
+      }
+    }
+
+    // 載入 wiki_knowledge 內的特定筆記
+    async function loadWikiNote(sector, filename) {
+      document.getElementById("breadcrumb").innerText = `wiki_knowledge / ${sector} / ${filename}`;
+      const path = `wiki_knowledge/${encodeURIComponent(sector)}/${encodeURIComponent(filename)}?t=${Date.now()}`;
+      try {
+        const res = await fetch(path);
+        if (!res.ok) throw new Error("檔案不存在");
+        const text = await res.text();
+        document.getElementById("viewer").innerHTML = renderMarkdown(text);
+      } catch (e) {
+        document.getElementById("viewer").innerHTML = `<div class="text-rose-600 text-sm">讀取筆記失敗：${e.message}</div>`;
+      }
+    }
+
+    // 初始化讀取 manifest.json 建立資料夾樹
+    async function init() {
+      const treeEl = document.getElementById("folder-tree");
+      try {
+        const res = await fetch(`wiki_knowledge/manifest.json?t=${Date.now()}`);
+        if (!res.ok) throw new Error("尚未產生索引");
+        const manifest = await res.json();
+
+        document.getElementById("last-updated").innerText = `最後更新：${manifest.updated_at}`;
+
+        const sectors = manifest.sectors || {};
+        const sectorNames = Object.keys(sectors);
+        let firstNote = null;
+
+        if (sectorNames.length === 0) {
+          treeEl.innerHTML = `<div class="text-xs text-slate-400">尚無資料，等待每日排程執行。</div>`;
+          return;
+        }
+
+        treeEl.innerHTML = sectorNames.map(sector => {
+          const files = sectors[sector];
+          if (!firstNote && files.length > 0) {
+            firstNote = { sector, file: files[0] };
+          }
+          const filesHtml = files.length > 0
+            ? files.map(f => `
+                <button onclick="loadWikiNote('${sector}', '${f}')"
+                  class="w-full text-left px-2.5 py-1.5 rounded-md text-xs sm:text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-700 transition truncate block">
+                  📄 ${f.replace(".md", "")}
+                </button>`).join("")
+            : `<div class="px-2.5 py-1 text-xs text-slate-400 italic">（尚無筆記）</div>`;
+
+          return `
+            <div>
+              <div class="font-semibold text-slate-800 text-xs sm:text-sm mb-1 flex items-center gap-1.5">
+                <span>📁</span>
+                <span>${sector}</span>
+              </div>
+              <div class="pl-3 border-l border-slate-200 space-y-0.5">
+                ${filesHtml}
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        // 預設自動開啟第一篇有內容的筆記；若還沒有筆記則顯示 AGENTS.md
+        if (firstNote) {
+          loadWikiNote(firstNote.sector, firstNote.file);
+        } else {
+          loadRootDoc("AGENTS.md");
+        }
+      } catch (e) {
+        document.getElementById("last-updated").innerText = "等待首次自動排程";
+        treeEl.innerHTML = `<div class="text-xs text-slate-500 bg-slate-100 p-3 rounded-lg leading-relaxed">
+          尚未偵測到自動生成的筆記。啟動 GitHub Actions 後，五大類股資料夾將自動顯示於此。
+        </div>`;
+        loadRootDoc("AGENTS.md");
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
