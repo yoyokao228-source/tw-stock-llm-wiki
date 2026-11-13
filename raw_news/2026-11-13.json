@@ -1,8 +1,16 @@
 {
-  "crawled_at": "2026-11-13 11:29:44 CST",
+  "crawled_at": "2026-11-13 11:51:41 CST",
   "date": "2026-11-13",
   "sectors": {
     "01_先進製程與CoWoS": [
+      {
+        "title": "《半導體》Ainos攜手日月光再拿900萬美元大單 AI Nose新增5000台訂單 - 富聯網",
+        "source": "富聯網",
+        "published_at": "2026-11-13 11:26",
+        "summary": "《半導體》Ainos攜手日月光再拿900萬美元大單 AI Nose新增5000台訂單 &nbsp;&nbsp; 富聯網",
+        "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNQnpNVVFhczQ3cEQ5YTQ1d3ctUW9laUNpeWxtNXBHd0NkRXFILTlocld4Q1pLcmhqWWZjM0dOeC1WYlYzSEhpUlNmVU9nSHNQQjViN25FNC1mV0U3N3FZQW5oaldvN0VHQVdjbE5CQWZPVk5rZ1J5WGwzRkNvQnZNWDM3MXhpWVBv?oc=5",
+        "region": "TW"
+      },
       {
         "title": "【即時新聞】台積電(2330)遇輝達人事震撼！法人評估先進製程與CoWoS總需求維持穩固 - CMoney投資網誌",
         "source": "CMoney投資網誌",
@@ -52,11 +60,19 @@
         "region": "US"
       },
       {
+        "title": "[News] NVIDIA without Huang: New Tests Ahead as AMD Eyes Gains, TSMC Finds a Cushion and Memory Giants Weigh Risks - TrendForce",
+        "source": "TrendForce",
+        "published_at": "2026-11-13 09:46",
+        "summary": "[News] NVIDIA without Huang: New Tests Ahead as AMD Eyes Gains, TSMC Finds a Cushion and Memory Giants Weigh Risks &nbsp;&nbsp; TrendForce",
+        "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQdTRhdUVYdVRzQkxqa2xxYVpUTVZOZW53TDIxX2NWc21GTjV4OS02R3JOR25GUDQ1Q1hXWXZEZUduVWNieldRSjJJc3RvaDQwNnZ3MUJVaG9BVWlOV2UxSUVoX2Q5R0otdE5RUEpCZXJ1MjJ2NXMta2JtVXV4eEkxbW1abGtwQmNLU09EZGV0cHVQclAxVjE1QWp1bE9JbHJURUVCd29NTGlZdGF0QVFUdUtkbm9waE0tWGdsc2xXRGJmUXdCdndyQXZyTHZ0NkJTUXBvcGJLOTBtM0RXbFdIRGNGV09faXJsNGc?oc=5",
+        "region": "US"
+      },
+      {
         "title": "黃仁勳辭職輝達概念股　11檔影響曝 - 鏡週刊Mirror Media",
         "source": "鏡週刊Mirror Media",
         "published_at": "2026-11-13 09:44",
         "summary": "黃仁勳辭職輝達概念股 11檔影響曝 &nbsp;&nbsp; 鏡週刊Mirror Media",
-        "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9MTEpuUEJYOGFiYURPQllfX0J1NG0zMEF6MXpocnVKcEloUkdRX2NMT29LWWpNQVI5cUJTTmljNlVTc2s2T1VGUlk3TmRfa1hnT1Q0S1UxT3l0c3No0gFiQVVfeXFMTXRQczMzOGhLS1gxanptUE5nZjdCamk5QXl3eDhHbUdhUHFxekRIUzFDLUdMdC13R0RYelpLdktXMGxLdlprbHZIWFlVTEhzSWVSQnh3QVdlOVB4cloyUFQ4V2c?oc=5",
+        "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE10UHMzMzhoS0tYMWp6bVBOZ2Y3QmppOUF5d3g4R21HYVBxcXpESFMxQy1HTHQtd0dEWHpaS3ZLVzBsS3Zaa2x2SFhZVUxIc0llUkJ4d0FXZTlQeHJaMlBUOFdn0gFiQVVfeXFMTXRQczMzOGhLS1gxanptUE5nZjdCamk5QXl3eDhHbUdhUHFxekRIUzFDLUdMdC13R0RYelpLdktXMGxLdlprbHZIWFlVTEhzSWVSQnh3QVdlOVB4cloyUFQ4V2c?oc=5",
         "region": "TW"
       },
       {
@@ -106,22 +122,6 @@
         "summary": "CoeWeave扮演AI及時雨 財測上修飆漲逾20% &nbsp;&nbsp; 非凡新聞台",
         "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBiTHFZaV91TURZLUhpMEFwQmM4RTVDUWsxSW1rcm1SSDdkQUNYclM1OWFXN1lGTkNPZVdtTC0zREZGc0t4NW10NmE0WXkyay0yQWhvQlhuMXZralk?oc=5",
         "region": "TW"
-      },
-      {
-        "title": "TWA00 加權指數- 輝達高層更迭引關注，台AI供應鏈上修展望- 股市爆料同學會 - CMoney",
-        "source": "CMoney",
-        "published_at": "2026-11-13 05:33",
-        "summary": "TWA00 加權指數- 輝達高層更迭引關注，台AI供應鏈上修展望- 股市爆料同學會 &nbsp;&nbsp; CMoney",
-        "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5rZUdJLWFDdE5ZSzNMd3JyZWdTS2FmX3FBbHRmOEVWd0V1YXJocUFSOURKakE2bUloaFJhMm5PNXJGSlhaaGszNjZlNmdEcUhiNFNZY3pCdVE?oc=5",
-        "region": "TW"
-      },
-      {
-        "title": "The 10 Largest Companies in the World by Market Cap and How They Performed This Year - Startup Fortune",
-        "source": "Startup Fortune",
-        "published_at": "2026-11-13 03:53",
-        "summary": "The 10 Largest Companies in the World by Market Cap and How They Performed This Year &nbsp;&nbsp; Startup Fortune",
-        "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPUTZqNkx5bC1lWXc3a0dKLWNCUUgydDdNQ3NkZnlnS3k3NUJVZUp5cU44OTg1M2Fwd1EtMWl5VG9CNDFoVHhZSWVSUC1Zd0dYRUNEVy1zM1h0Sk94V1h4Q1pKZkRma3lfZ0hNTkJkcFJ1MkpRb2RzRkxDc0FTSXFYWjUyYVF5d2h1cGRWeG1JZ25HeTljbi0zVDVmZVpkZHpVSUNvOXhOWUh1cU1BMUMtYjhR?oc=5",
-        "region": "US"
       }
     ],
     "02_AI伺服器與散熱": [
@@ -158,11 +158,11 @@
         "region": "TW"
       },
       {
-        "title": "輝達供應鏈雜音頻傳！「7檔」保證不出軌 - 鏡週刊Mirror Media",
-        "source": "鏡週刊Mirror Media",
-        "published_at": "2026-11-13 05:00",
-        "summary": "輝達供應鏈雜音頻傳！「7檔」保證不出軌 &nbsp;&nbsp; 鏡週刊Mirror Media",
-        "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE50ZjcyWmFPU2p5YTdtSlpnNGRqWUl0TTJObjhtTWJPcHNteHg1V3EyTHEtelZ5LWdrZDVLeDJCUzVueUl3dFdTRkNpdDFsQjdMUjNGT29RWDRhbUdVdzhHZDNB0gFiQVVfeXFMTnRmNzJaYU9TanlhN21KWmc0ZGpZSXRNMk5uOG1NYk9wc214eDVXcTJMcS16VnktZ2tkNUt4MkJTNW55SXd0V1NGQ2l0MWxCN0xSM0ZPb1FYNGFtR1V3OEdkM0E?oc=5",
+        "title": "輝達供應鏈雜音頻傳！川湖帶頭挺住 「7檔」保證不出軌 - 三立新聞網SETN.com",
+        "source": "三立新聞網SETN.com",
+        "published_at": "2026-11-13 05:04",
+        "summary": "輝達供應鏈雜音頻傳！川湖帶頭挺住 「7檔」保證不出軌 &nbsp;&nbsp; 三立新聞網SETN.com",
+        "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5UN1NXZi1uMWpvWFk1dnBKcVZiU1Y2dTZTYTFmM2ViT3g4ZWx2QTMtaUh3ZmlYZzRfQy04d2dEYlVOSVRBdXlMOGRIdw?oc=5",
         "region": "TW"
       },
       {
@@ -214,14 +214,6 @@
         "region": "US"
       },
       {
-        "title": "鴻海法說會／第4季與明年 AI 伺服器機櫃 持續高雙位數成長 | 經濟日報 - LINE TODAY",
-        "source": "LINE TODAY",
-        "published_at": "2026-11-12 15:32",
-        "summary": "鴻海法說會／第4季與明年 AI 伺服器機櫃 持續高雙位數成長 | 經濟日報 &nbsp;&nbsp; LINE TODAY",
-        "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBpdWJLX3BBRUxWeGcyekhrN20wejFYM1p2dVN6QV9YNGdWSHIwN1Z3YW4xRXRJZkJMUHo3RGhUUVRjcldFUW5NYWU0OTBzUnVlVUhxaW9R?oc=5",
-        "region": "TW"
-      },
-      {
         "title": "和碩法說／Q3營收創單季新高！GB300放量 對2027年審慎樂觀 - TVBS新聞網",
         "source": "TVBS新聞網",
         "published_at": "2026-11-12 15:22",
@@ -243,6 +235,14 @@
         "published_at": "2026-11-12 13:06",
         "summary": "Taiwan's AI server makers doubled October sales from a year earlier as Wistron, Gigabyte and Quanta led &nbsp;&nbsp; MLQ.ai",
         "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOUVh1SGIzTVl5NHJ5TE0zVmUxMi1lSXpuZC1ocTNIUnhSTVNsRnR6dk00TGFEdUZEbDFYdDg5TFlrbVZmbUQtMkhjelg4SlA3RVJPVDYyeHVsTmpvR2tJSHV5TTBJMGgyMnNCSUpWbXNLcjJvTHJ2TVZqNHVnb1p0ZEFxeVZpQ3poSUZITG5fUXBWekFRQ0hIMWxHa3hfbkRfalZvdWhsdWJTblFrM0hSb3Zvb01sQTF2aXdsRm5Maw?oc=5",
+        "region": "US"
+      },
+      {
+        "title": "AMD vs Nvidia GPU: 97% Growth vs 30x Claim [2026] - shattered.io",
+        "source": "shattered.io",
+        "published_at": "2026-11-12 12:17",
+        "summary": "AMD vs Nvidia GPU: 97% Growth vs 30x Claim [2026] &nbsp;&nbsp; shattered.io",
+        "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQN0RZZ1JDbjVJVEVEZ185SUJSbm1LMHNtMEk3a0Y0VFUteTRseTNDR3dwYjk3emxULVBGcDhUV0xKNTc2WTBObThEa0loNEo5Y256d3MtekFZeno2TktMMmZWdVJsalJTbUJoLV9qb3lMelByb1lpS2FIN1diSFNWNEp0Sm1PMXhMRW02dndRY3Nzd2xXU1E?oc=5",
         "region": "US"
       }
     ],
@@ -266,6 +266,14 @@
     ],
     "04_邊緣AI與機器人": [
       {
+        "title": "NVIDIA CEO Exit Sparks Investment Fears Among Korean Startups - 조선일보",
+        "source": "조선일보",
+        "published_at": "2026-11-13 11:27",
+        "summary": "NVIDIA CEO Exit Sparks Investment Fears Among Korean Startups &nbsp;&nbsp; 조선일보",
+        "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNczhTRXVhMnlNYkt0MUtPS3I2SXN1V2RYZlZRR1RuMFN4MjRsOFA3SksyZkdJSVdWaTBYU2UwQlZudy1PQXBPclRPNV9ieUNURE5vSVVhX0N4UmI0Y0ExUmxlLTkzUmFVSnNFNG9Gb0tZTHgxeU1MRUZNQ1hmcVdXNDJycDI4Rk1N?oc=5",
+        "region": "US"
+      },
+      {
         "title": "Gallop: How ASUS Is Building a Factory-Proven Humanoid Robot - ASUS Pressroom",
         "source": "ASUS Pressroom",
         "published_at": "2026-11-13 10:52",
@@ -274,11 +282,19 @@
         "region": "US"
       },
       {
-        "title": "NVIDIA CEO Exit Stirs Startup Investment Fears - 조선일보",
-        "source": "조선일보",
-        "published_at": "2026-11-13 10:00",
-        "summary": "NVIDIA CEO Exit Stirs Startup Investment Fears &nbsp;&nbsp; 조선일보",
-        "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNczhTRXVhMnlNYkt0MUtPS3I2SXN1V2RYZlZRR1RuMFN4MjRsOFA3SksyZkdJSVdWaTBYU2UwQlZudy1PQXBPclRPNV9ieUNURE5vSVVhX0N4UmI0Y0ExUmxlLTkzUmFVSnNFNG9Gb0tZTHgxeU1MRUZNQ1hmcVdXNDJycDI4Rk1N?oc=5",
+        "title": "臺灣機器人供應鏈動起來！ 產官研共推通用化指引助攻產業升級 - Knowing 新聞",
+        "source": "Knowing 新聞",
+        "published_at": "2026-11-13 10:05",
+        "summary": "臺灣機器人供應鏈動起來！ 產官研共推通用化指引助攻產業升級 &nbsp;&nbsp; Knowing 新聞",
+        "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE00eGd5NEd5ZXZ3N0s0bTVmd09FUEg1ck1LNXRUVWg3R1lBN1lDSDY4NjhjQzN0QzRJeWpBalNPMWlhbHJNdjBNN1I0UlFMQ21FLVR6QUZTSEMwTE9ZUmVFbmsyMlUyb2pRRTdtSFpPQzlFUWY5X3c?oc=5",
+        "region": "TW"
+      },
+      {
+        "title": "SoftBank, Nvidia back Germany's Agile Robots at $8.5 billion valuation - The Edge Malaysia",
+        "source": "The Edge Malaysia",
+        "published_at": "2026-11-13 09:52",
+        "summary": "SoftBank, Nvidia back Germany's Agile Robots at $8.5 billion valuation &nbsp;&nbsp; The Edge Malaysia",
+        "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE55LTVCWVZjTlh3ZXFUQU9vc21qMFBjWWNwc0I2M2N6ZVNZR3dzbWFJSldjTF9kZ01CakEwR0F0S1o1NXo5dWRkak5va1BNZVJu?oc=5",
         "region": "US"
       },
       {
@@ -295,6 +311,14 @@
         "published_at": "2026-11-13 07:42",
         "summary": "SoftBank leads $500 million bet on German robot maker Agile after China blocks ABB deal &nbsp;&nbsp; 디지털투데이",
         "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQQ2p6a2xIVldrNUQtZkNIbldqVnhFSWFDUnRHWUJFaGppeG9qMlNUWkIzZFRialphaFo5a3FVXzN2TXk5cTJiNGhoUjdIQXJCVEUtYkVKcE9tNHhVUkIyMXhVb1pFYU94cTRFdnpteV93d3YtOC1YcW9yWk1KOVJYbnV2Y1g1blRIQzRoUXFtN3ZmbzJGNF80d253NDlfeUJsTEhHMXZiUklYbXc1VzRhM29lc3QwSVJvaGtfMGJmMTlkYXJYZWJnUF83VWJ3d0RRMUZlVUh3?oc=5",
+        "region": "US"
+      },
+      {
+        "title": "Agile Robots: $500 Million Series F Led By SoftBank With Nvidia Participation At $8.5 Billion Valuation - Pulse 2.0",
+        "source": "Pulse 2.0",
+        "published_at": "2026-11-13 05:42",
+        "summary": "Agile Robots: $500 Million Series F Led By SoftBank With Nvidia Participation At $8.5 Billion Valuation &nbsp;&nbsp; Pulse 2.0",
+        "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNLXBJTkNWdFo3d0Y4V2FnNXFKMUluLUJhSUY2aHRFRkdDNmlTMG9DaVBUYmNfMTY4U3A4WUJFTFlWbUdvM0lYMW91akdhX2s5ellqWVRGMUpka3doMXRKY3VyR2tscGZJdEFFQ0R1WFdfVEZTdWFmY25iVEtUX0ZSc1g2S0pfZjY3QmZUOGI1R1BrUmNsUjl6LXFYd2FwSFNkLTNtNEwwNUhBYWhZWm5KaFl1akUyODNFa2YtVg?oc=5",
         "region": "US"
       },
       {
@@ -346,14 +370,6 @@
         "region": "US"
       },
       {
-        "title": "Germany's Agile Robots Raises $500M in Series F Funding to Expand Physical AI Production - AI Insider",
-        "source": "AI Insider",
-        "published_at": "2026-11-12 20:17",
-        "summary": "Germany's Agile Robots Raises $500M in Series F Funding to Expand Physical AI Production &nbsp;&nbsp; AI Insider",
-        "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQbVoxVEpYc2k0ZFFuTWROSFFxVjFKSVZiODBhVzRyOV9CSUtNamlBVU5nOVR4Y3hSWExFbXRMcmNjSWF3SmR4TFZOUUNrVjZyODFqUmlyUkZDTl9UZ2ZhTDNfYi1RcGdpSGhxNkprbVloYnJhX0c5RUVmVmR5T0NBbjZZU0U1WldvRllyeWZwVEh4NlRJS0FCcGRlNjRudE9mUkhkVXQ3QzUyZE82SHlwd2JXV05QeVQ0a0E4ellsT2VIUQ?oc=5",
-        "region": "US"
-      },
-      {
         "title": "助攻台廠切入全球機器人供應鏈！ 經濟部產發署攜手24家大廠發布通用化指引 - 報新聞 Mega News",
         "source": "報新聞 Mega News",
         "published_at": "2026-11-12 20:16",
@@ -368,22 +384,6 @@
         "summary": "Germany’s Agile Robots Raises $500 Million From Softbank, Nvidia At $8.5 Billion Valuation &nbsp;&nbsp; Forbes",
         "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQN2taQlMzeE15Nl8xM1F3c3JHbDNyNks4UEI3YVFCNERUX0NVeTh5akdMMm9GN21JcFk5bk1DT0hlbGs2QmFoVlRtT2N4NDZqRDM5SWtMQi1IeXZwTXBPek5NbnRxTE0yLUlsZFJoa2RoMWhCbkt0Q0ZjY3J0ZFV0UkllcHBKSWhxYUxNeTIxYW8xb3hBRXdlZnBWQjdsaHpfNEprcFdJQWFZeG9KOEs1WkxwVXR2MFRLd0JJRlpvZjlTV2Qtb3BmNzZJX3Uxb3hLUms4MkFn?oc=5",
         "region": "US"
-      },
-      {
-        "title": "Nvidia leadership uncertainty puts Korean chip supply deals under scrutiny - KED Global",
-        "source": "KED Global",
-        "published_at": "2026-11-12 19:40",
-        "summary": "Nvidia leadership uncertainty puts Korean chip supply deals under scrutiny &nbsp;&nbsp; KED Global",
-        "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5xa0tHTnJ4V05xUkNhTUJUR3J1RnQ5VXl4SUJkSEkwYXNLVkVwSnNZbTJQakVHSW15Z3JZYTBmVWRlZ2huU2dRR2dfSUo1cmNyUGNFOE9NV1cwekYxMDdkN2lKUFIxUFphX1NUWFg5ZXpRVS1zN1l3?oc=5",
-        "region": "US"
-      },
-      {
-        "title": "人形機器人3D視覺市場上看15億美元！康耐視砸5億美元併購圓剛(2471)、研華(2395)參與供應鏈 - 鉅亨網",
-        "source": "鉅亨網",
-        "published_at": "2026-11-12 19:00",
-        "summary": "人形機器人3D視覺市場上看15億美元！康耐視砸5億美元併購圓剛(2471)、研華(2395)參與供應鏈 &nbsp;&nbsp; 鉅亨網",
-        "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5GbFVXTUZXTjJER1ppbVZGME4zZElEaGd1SzViSXdNeDhaZUdUU2pKRllVTUY3VXI5UVdMRUkzbWVHbzh6WXdjbE1nYXVDXzQ?oc=5",
-        "region": "TW"
       }
     ],
     "05_重電與綠能儲能": [
@@ -458,14 +458,6 @@
         "summary": "【即時新聞】最新！華城前三季EPS達10.48元賺逾一個股本，訂單滿載至2030年 &nbsp;&nbsp; CMoney投資網誌",
         "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQMkFsUW9oRnMxLU9RYWh4dHhTYl92TmZmT2pKUzhWQ0phVndaS3J5S0w1cG9HZTMwSW9ULV9tWUk3MnNxaDdDczdpdWRPb3FlWWd3azVZZjA1MUllaHNQZHFnYlMwZUVDYXZ6VlBpZWc4N01vM1hKU3lPdG4wZHVGRXVRUkVRVUtWWW1sb0Zjc1Y?oc=5",
         "region": "TW"
-      },
-      {
-        "title": "Energy Transition Update - Holu Hou Energy Revolutionizes MDU Solar Adoption - Yahoo Finance UK",
-        "source": "Yahoo Finance UK",
-        "published_at": "2026-11-12 19:37",
-        "summary": "Energy Transition Update - Holu Hou Energy Revolutionizes MDU Solar Adoption &nbsp;&nbsp; Yahoo Finance UK",
-        "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPSjdxa0lTQzZhOHlES2NPUDh0Mzg2OUdCaDhUMzBQVUFzVUFiWE80OWV5YlUxZzkyYndJaFRmSVQwZTE3bHdreV81SUFIUDJWZFpQenRRWGRxbGFEYzN4dzNfMXU0d0VPZHVaaWt4djNwTkEyVDdfRVhMM3dSVEpSckRzN3FmOTZwQkE?oc=5",
-        "region": "US"
       },
       {
         "title": "中興電(1513) 個股概覽 | 個股 - 股市 - CMoney",
