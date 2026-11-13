@@ -24,7 +24,6 @@ def get_available_groq_model(api_key: str) -> str:
     with urllib.request.urlopen(req, timeout=30) as resp:
         data = json.loads(resp.read().decode("utf-8"))
 
-    # 排除語音轉文字、TTS 或安全過濾專用模型
     excluded = ("whisper", "guard", "tts", "playai", "orpheus", "compound")
     candidates = [
         m["id"]
@@ -35,7 +34,6 @@ def get_available_groq_model(api_key: str) -> str:
     if not candidates:
         raise RuntimeError("Groq 帳號下找不到可用的對話模型！")
 
-    # 優先挑選推理能力較強的大型模型
     preferences = ["llama-4", "70b", "qwen", "gpt-oss", "32b", "llama-3.1-8b-instant"]
     for pref in preferences:
         for mid in candidates:
@@ -80,7 +78,6 @@ def call_groq(api_key: str, model_id: str, prompt: str) -> dict:
         result = json.loads(resp.read().decode("utf-8"))
 
     raw_text = result["choices"][0]["message"]["content"].strip()
-    # 移除可能出現的 Markdown 程式碼區塊外框
     raw_text = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw_text)
     return json.loads(raw_text)
 
@@ -127,13 +124,11 @@ def run_builder():
     now_tw = datetime.now(TW_TZ)
     today_str = now_tw.strftime("%Y-%m-%d")
 
-    # 1. 讀取 AGENTS.md 規則
     if not os.path.exists("AGENTS.md"):
         raise FileNotFoundError("找不到 AGENTS.md 規則檔！")
     with open("AGENTS.md", "r", encoding="utf-8") as f:
         agents_rules = f.read()
 
-    # 2. 讀取今日爬蟲抓到的新聞
     news_path = os.path.join("raw_news", f"{today_str}.json")
     if not os.path.exists(news_path):
         print(f"今日尚無新聞檔案 ({news_path})，結束編譯。")
@@ -145,8 +140,9 @@ def run_builder():
     wiki_root = "wiki_knowledge"
     os.makedirs(wiki_root, exist_ok=True)
 
-    # 3. 逐一處理五大類股
-    for sector, articles in news_data.get("sectors", {}).items():
+    sectors_items = list(news_data.get("sectors", {}).items())
+
+    for idx, (sector, articles) in enumerate(sectors_items):
         sector_dir = os.path.join(wiki_root, sector)
         os.makedirs(sector_dir, exist_ok=True)
 
@@ -154,7 +150,9 @@ def run_builder():
             print(f"[{sector}] 今日無新聞，跳過。")
             continue
 
-        # 讀取該資料夾現有的 .md 筆記，讓 AI 能夠進行「增量累加更新」
+        # 精選前 10 則新聞，避免單次輸入過長超過免費版 Token 上限
+        selected_articles = articles[:10]
+
         existing_notes = {}
         for fname in os.listdir(sector_dir):
             if fname.endswith(".md"):
@@ -173,17 +171,17 @@ def run_builder():
 今日日期為：「{today_str}」
 
 【該資料夾目前已存在的筆記檔案內容】：
-{json.dumps(existing_notes, ensure_ascii=False, indent=2) if existing_notes else "（目前尚無任何筆記，請依主題或代表個股建立新檔案，例如 `2330_台積電.md` 或 `CoWoS先進封裝動態.md`）"}
+{json.dumps(existing_notes, ensure_ascii=False, indent=2) if existing_notes else "（目前尚無任何筆記，請依主題或代表個股建立新檔案，例如 `2382_廣達.md` 或 `AI伺服器散熱動態.md`）"}
 
 【今日抓到的原始新聞清單】：
-{json.dumps(articles, ensure_ascii=False, indent=2)}
+{json.dumps(selected_articles, ensure_ascii=False, indent=2)}
 
 【任務要求】：
-1. 依據 AGENTS.md 第 4 節的「資訊過濾守門員原則」，剔除純漲跌播報與無效雜訊，只萃取實質產業事件。
-2. 若今日沒有任何具備實質產業價值的新聞，請回傳 `{{"updates": []}}`。
-3. 若有實質事件，請將事件整理為「四段式解讀模板」，並由新到舊累加進對應的 `.md` 檔案中（保留原有舊日期內容，若新事件與舊事件相同則合併補充細節）。
+1. 依據 AGENTS.md 的規則，過濾掉純盤中漲跌雜訊，從今日新聞中萃取出具備「技術突破、產能擴充、訂單動向、法說展望或供應鏈趨勢」的實質事件（每個類股請盡量整理出 1～2 篇最具代表性的供應鏈或個股筆記）。
+2. 若今日完全沒有任何與該產業相關的新聞，才回傳 `{{"updates": []}}`。
+3. 請將事件整理為「四段式解讀模板」，並由新到舊累加進對應的 `.md` 檔案中（保留原有舊日期內容）。
 4. 務必在文中標註 `[[實體或技術名稱]]` 雙向連結。
-5. 請嚴格以以下 JSON 格式回傳結果（回傳更新後的完整檔案 Markdown 內容）：
+5. 請嚴格以以下 JSON 格式回傳結果：
 {{
   "updates": [
     {{
@@ -215,10 +213,10 @@ def run_builder():
         except Exception as e:
             print(f"[警告] {sector} 編譯失敗: {e}")
 
-        # 間隔 5 秒，避免觸發 Groq 免費版每分鐘請求次數上限
-        time.sleep(5)
+        # 最後一個類股跑完不用再等；其餘間隔 20 秒避開 Groq 免費版每分鐘上限
+        if idx < len(sectors_items) - 1:
+            time.sleep(20)
 
-    # 4. 更新目錄索引供前端網頁使用
     build_manifest(wiki_root, now_tw)
     print("\nLLM Wiki 編譯完成！")
 
