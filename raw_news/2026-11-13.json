@@ -1,5 +1,5 @@
 {
-  "crawled_at": "2026-11-13 11:51:41 CST",
+  "crawled_at": "2026-11-13 11:56:03 CST",
   "date": "2026-11-13",
   "sectors": {
     "01_先進製程與CoWoS": [
@@ -116,12 +116,12 @@
         "region": "TW"
       },
       {
-        "title": "CoeWeave扮演AI及時雨 財測上修飆漲逾20% - 非凡新聞台",
-        "source": "非凡新聞台",
-        "published_at": "2026-11-13 05:39",
-        "summary": "CoeWeave扮演AI及時雨 財測上修飆漲逾20% &nbsp;&nbsp; 非凡新聞台",
-        "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBiTHFZaV91TURZLUhpMEFwQmM4RTVDUWsxSW1rcm1SSDdkQUNYclM1OWFXN1lGTkNPZVdtTC0zREZGc0t4NW10NmE0WXkyay0yQWhvQlhuMXZralk?oc=5",
-        "region": "TW"
+        "title": "Pegatron 3Q26 operating profit jumps 150% on strong server, smartphone shipments - digitimes",
+        "source": "digitimes",
+        "published_at": "2026-11-13 05:45",
+        "summary": "Pegatron 3Q26 operating profit jumps 150% on strong server, smartphone shipments &nbsp;&nbsp; digitimes",
+        "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQWW5QdUV2NjJJbUVjM01KWUtIM3VPTEM0ZTlDT3lvQ3dQa2VIVUxaQ3ZZcENNREdBcXl4WUpoMVotX0RrOVgzV3B0NnBOcmZ1VXktMTE5Y21ocU5TbzZkRGY2SFY2T05EOXkxNlFDdl9HTGFDN1FGZUpLcDE3Q1U5Z1V1VE9RM2hLZHY2YzM0ZG92S0NzcnVhYnh3M0xXQlYybzRiSnBWNFRJZw?oc=5",
+        "region": "US"
       }
     ],
     "02_AI伺服器與散熱": [
@@ -286,7 +286,7 @@
         "source": "Knowing 新聞",
         "published_at": "2026-11-13 10:05",
         "summary": "臺灣機器人供應鏈動起來！ 產官研共推通用化指引助攻產業升級 &nbsp;&nbsp; Knowing 新聞",
-        "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE00eGd5NEd5ZXZ3N0s0bTVmd09FUEg1ck1LNXRUVWg3R1lBN1lDSDY4NjhjQzN0QzRJeWpBalNPMWlhbHJNdjBNN1I0UlFMQ21FLVR6QUZTSEMwTE9ZUmVFbmsyMlUyb2pRRTdtSFpPQzlFUWY5X3c?oc=5",
+        "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE4zZ0FUVzE4XzVNLS1iU1BDcDBXc3VRS2VySFlnMW5xSTh3VklKWElqalZMWGhXSVFWWDc3MmNqc29XLU9TbTNna09pZjY0a0dzbE5jcHFNeVFpbWl4RTA1SG5zOFdWNFRmM01nSnVUNTFHbzhzeXc?oc=5",
         "region": "TW"
       },
       {
@@ -458,6 +458,14 @@
         "summary": "【即時新聞】最新！華城前三季EPS達10.48元賺逾一個股本，訂單滿載至2030年 &nbsp;&nbsp; CMoney投資網誌",
         "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQMkFsUW9oRnMxLU9RYWh4dHhTYl92TmZmT2pKUzhWQ0phVndaS3J5S0w1cG9HZTMwSW9ULV9tWUk3MnNxaDdDczdpdWRPb3FlWWd3azVZZjA1MUllaHNQZHFnYlMwZUVDYXZ6VlBpZWc4N01vM1hKU3lPdG4wZHVGRXVRUkVRVUtWWW1sb0Zjc1Y?oc=5",
         "region": "TW"
+      },
+      {
+        "title": "Energy Transition Update - Holu Hou Energy Revolutionizes MDU Solar Adoption - Yahoo Finance UK",
+        "source": "Yahoo Finance UK",
+        "published_at": "2026-11-12 19:37",
+        "summary": "Energy Transition Update - Holu Hou Energy Revolutionizes MDU Solar Adoption &nbsp;&nbsp; Yahoo Finance UK",
+        "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPSjdxa0lTQzZhOHlES2NPUDh0Mzg2OUdCaDhUMzBQVUFzVUFiWE80OWV5YlUxZzkyYndJaFRmSVQwZTE3bHdreV81SUFIUDJWZFpQenRRWGRxbGFEYzN4dzNfMXU0d0VPZHVaaWt4djNwTkEyVDdfRVhMM3dSVEpSckRzN3FmOTZwQkE?oc=5",
+        "region": "US"
       },
       {
         "title": "中興電(1513) 個股概覽 | 個股 - 股市 - CMoney",
