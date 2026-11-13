@@ -9,16 +9,48 @@ from datetime import datetime, timedelta, timezone
 # 台灣時區 (UTC+8)
 TW_TZ = timezone(timedelta(hours=8))
 
-# 使用 Groq 免費額度支援且繁中表現優良的模型
-GROQ_MODEL = "llama-3.3-70b-versatile"
+
+def get_available_groq_model(api_key: str) -> str:
+    """自動向 Groq 查詢目前帳號可用的最新對話模型"""
+    url = "https://api.groq.com/openai/v1/models"
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        },
+        method="GET",
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+
+    # 排除語音轉文字、TTS 或安全過濾專用模型
+    excluded = ("whisper", "guard", "tts", "playai", "orpheus", "compound")
+    candidates = [
+        m["id"]
+        for m in data.get("data", [])
+        if m.get("id") and not any(k in m["id"].lower() for k in excluded)
+    ]
+
+    if not candidates:
+        raise RuntimeError("Groq 帳號下找不到可用的對話模型！")
+
+    # 優先挑選推理能力較強的大型模型
+    preferences = ["llama-4", "70b", "qwen", "gpt-oss", "32b", "llama-3.1-8b-instant"]
+    for pref in preferences:
+        for mid in candidates:
+            if pref in mid.lower():
+                return mid
+
+    return candidates[0]
 
 
-def call_groq(api_key: str, prompt: str) -> dict:
+def call_groq(api_key: str, model_id: str, prompt: str) -> dict:
     """呼叫 Groq Chat Completions API 並要求回傳結構化 JSON"""
     url = "https://api.groq.com/openai/v1/chat/completions"
 
     payload = {
-        "model": GROQ_MODEL,
+        "model": model_id,
         "messages": [
             {
                 "role": "system",
@@ -47,7 +79,9 @@ def call_groq(api_key: str, prompt: str) -> dict:
     with urllib.request.urlopen(req, timeout=60) as resp:
         result = json.loads(resp.read().decode("utf-8"))
 
-    raw_text = result["choices"][0]["message"]["content"]
+    raw_text = result["choices"][0]["message"]["content"].strip()
+    # 移除可能出現的 Markdown 程式碼區塊外框
+    raw_text = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw_text)
     return json.loads(raw_text)
 
 
@@ -86,6 +120,9 @@ def run_builder():
     api_key = os.environ.get("GROQ_API_KEY", "").strip()
     if not api_key:
         raise ValueError("找不到 GROQ_API_KEY 環境變數！請確認已在 GitHub Secrets 設定金鑰。")
+
+    model_id = get_available_groq_model(api_key)
+    print(f"自動選用 Groq 可用模型：{model_id}")
 
     now_tw = datetime.now(TW_TZ)
     today_str = now_tw.strftime("%Y-%m-%d")
@@ -159,7 +196,7 @@ def run_builder():
 
         print(f"正在呼叫 Groq 編譯：{sector} ...")
         try:
-            response_json = call_groq(api_key, prompt)
+            response_json = call_groq(api_key, model_id, prompt)
             updates = response_json.get("updates", [])
 
             if not updates:
