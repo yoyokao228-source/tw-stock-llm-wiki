@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>教學簡報｜看懂台股五大 AI 與能源核心供應鏈</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .slide-fade {
+      animation: fadeIn 0.25s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-800 min-h-screen flex flex-col justify-between font-sans antialiased select-none">
+
+  <!-- 頂部控制列 -->
+  <header class="bg-slate-950/80 border-b border-slate-800 text-slate-300 px-4 sm:px-8 h-14 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-600 text-white">教學簡報</span>
+      <span class="text-sm font-medium text-slate-200 hidden sm:inline">台股五大前景供應鏈入門指南</span>
+    </div>
+    <div class="flex items-center gap-4 text-xs">
+      <a href="./index.html" target="_blank" class="text-blue-400 hover:text-blue-300 underline underline-offset-4">
+        開啟資料來源：LLM Wiki 知識庫 ↗
+      </a>
+      <span id="slide-counter" class="font-mono bg-slate-800 px-2.5 py-1 rounded text-slate-200">1 / 8</span>
+    </div>
+  </header>
+
+  <!-- 進度條 -->
+  <div class="w-full bg-slate-800 h-1">
+    <div id="progress-bar" class="bg-blue-500 h-1 transition-all duration-300" style="width: 12.5%"></div>
+  </div>
+
+  <!-- 簡報主舞台 -->
+  <main class="flex-1 flex items-center justify-center p-4 sm:p-8">
+    <div id="slide-container" class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-slate-200 p-7 sm:p-12 min-h-[460px] flex flex-col justify-between slide-fade">
+      <!-- 內容由 JS 動態渲染 -->
+    </div>
+  </main>
+
+  <!-- 底部翻頁控制列 -->
+  <footer class="bg-slate-950/80 border-t border-slate-800 px-4 sm:px-8 py-3.5 flex items-center justify-between text-slate-300">
+    <button onclick="prevSlide()" id="btn-prev"
+      class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:pointer-events-none text-sm font-medium transition">
+      ← 上一頁
+    </button>
+
+    <!-- 頁碼圓點 -->
+    <div id="slide-dots" class="flex items-center gap-2"></div>
+
+    <button onclick="nextSlide()" id="btn-next"
+      class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-30 disabled:pointer-events-none text-white text-sm font-medium transition">
+      下一頁 →
+    </button>
+  </footer>
+
+  <script>
+    let wikiUpdatedText = "已連結至 tw-stock-llm-wiki 知識庫";
+
+    const slides = [
+      {
+        tag: "封面導覽",
+        title: "看懂台股五大核心供應鏈",
+        subtitle: "給完全沒接觸過科技股的新手：從 AI 晶片到電網的產業白話地圖",
+        body: `
+          <div class="grid sm:grid-cols-2 gap-4 mt-4">
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+              <div class="text-xs font-semibold text-blue-600 uppercase mb-1">這份簡報適合誰？</div>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                常在新聞上聽到「CoWoS、水冷散熱、矽光子、重電」，卻不知道它們是什麼的人。我們不講複雜財報，只用生活比喻帶你一次看懂！
+              </p>
+            </div>
+            <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-5">
+              <div class="text-xs font-semibold text-blue-700 uppercase mb-1">知識庫資料來源</div>
+              <p class="text-sm text-slate-700 leading-relaxed">
+                本簡報內容萃取自自動化累積的 <strong>台股五大供應鏈 LLM Wiki</strong>（每日自動收集並結構化整理產業新聞）。
+              </p>
+              <div id="wiki-status" class="mt-2 text-xs font-mono text-blue-700">${wikiUpdatedText}</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: "基礎觀念",
+        title: "先懂一件事：什麼是「供應鏈」？",
+        subtitle: "就像開一間超人氣便當店，需要有人種米、有人做便當盒、有人送外送",
+        body: `
+          <div class="space-y-4 mt-2">
+            <p class="text-slate-600 text-base leading-relaxed">
+              像輝達（Nvidia）或蘋果這類國際科技巨頭，主要負責「設計藍圖」，但要把設計變成真正的 AI 伺服器或手機，必須依賴台灣上百家專業工廠分工合作，這條分工線就是<strong>供應鏈</strong>。
+            </p>
+            <div class="grid sm:grid-cols-3 gap-4 pt-2">
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div class="font-bold text-slate-900 mb-1">1. 做大腦（晶片）</div>
+                <p class="text-xs text-slate-600 leading-relaxed">把設計圖變成指甲大小的精密晶片，並把它們包裝起來。</p>
+              </div>
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div class="font-bold text-slate-900 mb-1">2. 蓋機房（組裝與傳輸）</div>
+                <p class="text-xs text-slate-600 leading-relaxed">把晶片裝進大機櫃、幫它降溫散熱，並用高速網路串聯起來。</p>
+              </div>
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div class="font-bold text-slate-900 mb-1">3. 供電力（能源與應用）</div>
+                <p class="text-xs text-slate-600 leading-relaxed">提供穩定龐大的電力給資料中心，並把 AI 帶進機器人與日常設備。</p>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: "供應鏈 01｜先進製程與 CoWoS",
+        title: "CoWoS：把晶片疊在一起的「高級多層便當盒」",
+        subtitle: "為什麼 AI 時代大家都在搶台積電的 CoWoS 產能？",
+        body: `
+          <div class="space-y-4">
+            <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-xl text-sm text-slate-700 leading-relaxed">
+              <strong>白話解釋：</strong>以前晶片是各自平放在主機板上，資料跑來跑去很花時間；<strong>CoWoS 先進封裝</strong>就像是把「計算晶片」與「記憶體」緊密疊在同一個底座上，距離變超近，AI 算起來就又快又省電！
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">為什麼它是關鍵瓶頸？</div>
+                <p class="text-slate-600 text-xs leading-relaxed">
+                  目前全球最高階的 AI 晶片幾乎都必須經過這道工序。根據 LLM Wiki 追蹤，即使大客戶高層變動，產能需求依然排到 2028 年，是整條 AI 供應鏈最核心的起點。
+                </p>
+              </div>
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">Wiki 關鍵實體標籤</div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">台積電 (2330)</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">CoWoS</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">Nvidia</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">AMD</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: "供應鏈 02｜AI 伺服器與散熱",
+        title: "算力越強越發燒：從「吹電風扇」變成「裝冷氣水冷」",
+        subtitle: "AI 伺服器機櫃的組裝與散熱革命",
+        body: `
+          <div class="space-y-4">
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-sm text-slate-700 leading-relaxed">
+              <strong>白話解釋：</strong>一般電腦發熱時，用風扇吹一吹（氣冷）就好；但一整櫃 AI 伺服器的發熱量像好幾十台電暖器同時開，風扇已經吹不涼了，必須改用管線讓冷卻液直接流過晶片帶走熱量，這就是<strong>水冷散熱</strong>。
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">台灣扮演什麼角色？</div>
+                <p class="text-slate-600 text-xs leading-relaxed">
+                  全球超過 8 成以上的 AI 伺服器由台灣大廠負責設計與組裝；同時水冷板、冷卻液分配裝置（CDU）等散熱零組件也成為台廠的新成長引擎。
+                </p>
+              </div>
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">Wiki 關鍵實體標籤</div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">AI 伺服器</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">水冷散熱</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">廣達 / 鴻海</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">奇鋐 / 雙鴻</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: "供應鏈 03｜矽光子與 CPO",
+        title: "銅線大塞車怎麼辦？改用「光」來傳資料！",
+        subtitle: "矽光子與共同封裝光學（CPO）帶來的傳輸革命",
+        body: `
+          <div class="space-y-4">
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 rounded-r-xl text-sm text-slate-700 leading-relaxed">
+              <strong>白話解釋：</strong>傳統晶片之間用「銅線傳電訊號」，資料量大時就像高速公路大塞車，還會發燙耗電。<strong>矽光子與 CPO</strong> 是把光學元件直接做進晶片旁邊，讓資料改用「光速」傳輸，速度暴增、耗電大幅下降。
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">產業發展現況</div>
+                <p class="text-slate-600 text-xs leading-relaxed">
+                  隨著 800G 與 1.6T 超高速網路時代來臨，晶圓代工龍頭與台灣光通訊廠正聯手建立矽光子聯盟，是未來 2～3 年最受矚目的下一代技術。
+                </p>
+              </div>
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">Wiki 關鍵實體標籤</div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">矽光子</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">CPO 共同封裝光學</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">光收發模組</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: "供應鏈 04｜邊緣 AI 與機器人",
+        title: "AI 走出雲端機房：裝進手機、電腦與機器人裡",
+        subtitle: "不需要連上雲端也能即時反應的「邊緣 AI（Edge AI）」",
+        body: `
+          <div class="space-y-4">
+            <div class="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-xl text-sm text-slate-700 leading-relaxed">
+              <strong>白話解釋：</strong>以前問 AI 問題，資料要傳到遠方的雲端機房算完再傳回來；<strong>邊緣 AI</strong> 是把變小的 AI 模型直接放進你手邊的 AI PC、手機或工廠機器人裡，斷網也能用、反應零延遲且更保護隱私。
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">為什麼跟台灣有關？</div>
+                <p class="text-slate-600 text-xs leading-relaxed">
+                  台灣擁有全球最完整的筆電品牌、工業電腦、機器人視覺鏡頭與精密減速機零組件廠，是 AI 落地到實體世界的重要推手。
+                </p>
+              </div>
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">Wiki 關鍵實體標籤</div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">邊緣 AI</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">AI PC</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">智慧機器人</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">工業電腦</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: "供應鏈 05｜重電與綠能儲能",
+        title: "算力的盡頭是電力！沒有電，再強的 AI 也動不了",
+        subtitle: "資料中心擴建帶動的電網升級與儲能商機",
+        body: `
+          <div class="space-y-4">
+            <div class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-xl text-sm text-slate-700 leading-relaxed">
+              <strong>白話解釋：</strong>一座大型 AI 資料中心的耗電量相當於一整座中型城市。要把電廠發的電安全送到機房，需要大型<strong>變壓器與配電盤（重電設備）</strong>；為了避免跳電並配合綠能，還需要大型電池櫃（<strong>儲能系統</strong>）。
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">為什麼訂單能見度高？</div>
+                <p class="text-slate-600 text-xs leading-relaxed">
+                  不僅台灣需要強韌電網計畫，美國與全球電網也因老舊與 AI 設廠而大缺變壓器，讓台灣重電大廠外銷訂單持續滿載。
+                </p>
+              </div>
+              <div class="border border-slate-200 rounded-2xl p-4">
+                <div class="font-bold text-slate-900 mb-1.5">Wiki 關鍵實體標籤</div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">重電設備</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">變壓器</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">儲能系統</span>
+                  <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">華城 / 中興電</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        tag: "總結與知識庫連結",
+        title: "一張表複習五大供應鏈",
+        subtitle: "從晶片製造到電力供應，缺一不可的完整生態系",
+        body: `
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                  <th class="py-2.5 px-3 font-bold">供應鏈領域</th>
+                  <th class="py-2.5 px-3 font-bold">解決什麼問題？</th>
+                  <th class="py-2.5 px-3 font-bold">一句話記憶法</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 text-slate-600">
+                <tr>
+                  <td class="py-2.5 px-3 font-semibold text-slate-900">01 先進製程與 CoWoS</td>
+                  <td class="py-2.5 px-3">晶片運算速度與緊密封裝</td>
+                  <td class="py-2.5 px-3">把晶片疊在一起的高級便當盒</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-semibold text-slate-900">02 AI 伺服器與散熱</td>
+                  <td class="py-2.5 px-3">高功率機櫃組裝與降溫</td>
+                  <td class="py-2.5 px-3">從吹風扇升級成裝水冷冷氣</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-semibold text-slate-900">03 矽光子與 CPO</td>
+                  <td class="py-2.5 px-3">晶片間超高速資料傳輸</td>
+                  <td class="py-2.5 px-3">銅線塞車改用光速傳資料</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-semibold text-slate-900">04 邊緣 AI 與機器人</td>
+                  <td class="py-2.5 px-3">終端設備自主運算與自動化</td>
+                  <td class="py-2.5 px-3">讓手機與機械手臂長出大腦</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-semibold text-slate-900">05 重電與綠能儲能</td>
+                  <td class="py-2.5 px-3">機房穩定供電與電網升級</td>
+                  <td class="py-2.5 px-3">算力的盡頭是電力</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+            <span>提示：可使用鍵盤左右方向鍵（← / →）切換投影片</span>
+            <a href="./index.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-medium hover:bg-blue-100 transition">
+              前往查看每日自動更新的 LLM Wiki 筆記 →
+            </a>
+          </div>
+        `
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function renderSlide() {
+      const slide = slides[currentIndex];
+      const container = document.getElementById("slide-container");
+
+      // 重新觸發淡入動畫
+      container.classList.remove("slide-fade");
+      void container.offsetWidth;
+      container.classList.add("slide-fade");
+
+      container.innerHTML = `
+        <div>
+          <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 mb-3">
+            ${slide.tag}
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+            ${slide.title}
+          </h1>
+          <p class="text-sm sm:text-base text-slate-500 mt-1.5 mb-5">
+            ${slide.subtitle}
+          </p>
+        </div>
+        <div class="my-auto">
+          ${slide.body}
+        </div>
+      `;
+
+      document.getElementById("slide-counter").innerText = `${currentIndex + 1} / ${slides.length}`;
+      document.getElementById("progress-bar").style.width = `${((currentIndex + 1) / slides.length) * 100}%`;
+      document.getElementById("btn-prev").disabled = currentIndex === 0;
+      document.getElementById("btn-next").disabled = currentIndex === slides.length - 1;
+
+      // 更新底部圓點
+      const dotsEl = document.getElementById("slide-dots");
+      dotsEl.innerHTML = slides.map((_, idx) => `
+        <button onclick="goToSlide(${idx})" aria-label="第 ${idx + 1} 頁"
+          class="w-2.5 h-2.5 rounded-full transition ${idx === currentIndex ? 'bg-blue-500 scale-125' : 'bg-slate-700 hover:bg-slate-500'}">
+        </button>
+      `).join("");
+    }
+
+    function nextSlide() {
+      if (currentIndex < slides.length - 1) {
+        currentIndex++;
+        renderSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderSlide();
+      }
+    }
+
+    function goToSlide(idx) {
+      currentIndex = idx;
+      renderSlide();
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " ") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+    });
+
+    // 嘗試讀取 Wiki 的 manifest.json 顯示最新更新時間
+    fetch(`wiki_knowledge/manifest.json?t=${Date.now()}`)
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data && data.updated_at) {
+          wikiUpdatedText = `知識庫最後自動更新：${data.updated_at}`;
+          slides[0].body = slides[0].body.replace("已連結至 tw-stock-llm-wiki 知識庫", wikiUpdatedText);
+          if (currentIndex === 0) renderSlide();
+        }
+      })
+      .catch(() => {});
+
+    renderSlide();
+  </script>
+</body>
+</html>
